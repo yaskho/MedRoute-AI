@@ -1,0 +1,21 @@
+# Environnements et caches
+__pycache__/
+.venv/
+medroute/
+
+# Modèles lourds
+models/
+
+# Données
+data/
+# Caches et checkpoints de notebooks
+.ipynb_checkpoints/
+**/__pycache__/
+.vscode/
+
+# Fichiers volumineux ou de données
+*.h5
+*.pkl
+*.csv
+data/
+models/
