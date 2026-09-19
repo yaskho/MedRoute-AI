@@ -200,7 +200,8 @@ st.markdown('<p class="sub-header">Plateforme d’aiguillage intelligent et d’
 if "intent" not in st.session_state:
     st.session_state.intent = None
 
-st.markdown("#### 🎯 Sélectionnez le type d'examen à réaliser :")
+# --- SECTION SÉLECTION : BOUTONS + BARRE DE PROMPT EN LANGAGE NATUREL ---
+st.markdown("#### 🎯 Sélectionnez ou décrivez le type d'examen à réaliser :")
 
 col_btn1, col_btn2, col_btn3 = st.columns(3)
 
@@ -215,6 +216,25 @@ with col_btn2:
 with col_btn3:
     if st.button("📋 Bilan Global (Les deux)", use_container_width=True, type="primary"):
         st.session_state.intent = "MULTIMODAL"
+
+# Barre de prompt en langage naturel (Orchestrateur)
+st.markdown("<br>", unsafe_allow_html=True)
+user_prompt = st.text_input("💬 **Ou exprimez votre besoin en langage naturel (ex: 'Analyser le risque diabétique et vérifier cette lésion suspecte') :**", key="doctor_prompt_input")
+if st.button("🚀 Soumettre la requête textuelle", use_container_width=False):
+    if user_prompt:
+        query_lower = user_prompt.lower()
+        has_diab = any(w in query_lower for w in ["diabète", "glycémie", "métabolique", "sucre", "tabulaire", "diabete"])
+        has_derm = any(w in query_lower for w in ["peau", "lésion", "mélanome", "dermatologie", "image", "tache", "cutané"])
+        
+        if has_diab and has_derm:
+            st.session_state.intent = "MULTIMODAL"
+        elif has_derm:
+            st.session_state.intent = "IMAGE_ONLY"
+        elif has_diab:
+            st.session_state.intent = "TABULAR_ONLY"
+        else:
+            st.session_state.intent = "MULTIMODAL"
+        st.rerun()
 
 st.markdown("---")
 
@@ -285,7 +305,6 @@ if st.session_state.intent:
             except Exception as e:
                 st.error(f"Erreur lors du calcul du modèle : {e}")
         else:
-            # Fallback si modèle non chargé directement
             prob_fallback = 0.78 if glucose > 140 else 0.25
             risk_label = "Risque Élevé" if prob_fallback > 0.5 else "Risque Faible"
             conf_label = f"{prob_fallback*100:.1f}%"
