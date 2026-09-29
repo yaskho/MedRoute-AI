@@ -403,7 +403,6 @@ if st.session_state.intent:
         
         st.info("💡 **Note méthodologique :** Une haute sensibilité est privilégiée pour le module dermatologique afin de minimiser les faux négatifs (risques de non-détection d'un mélanome).")
 
-    # --- SECTION EXPORT RAPPORT CLINIQUE PDF ---
     st.markdown("---")
     st.subheader("📄 Génération de Compte-Rendu")
     if st.button("Générer le rapport PDF officiel de la consultation", type="primary"):
