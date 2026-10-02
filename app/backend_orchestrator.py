@@ -4,7 +4,6 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 import joblib
 import os
 
-# --- CHARGEMENT DES MODÈLES ---
 MODEL_DIR = "../models"
 
 print("Chargement des modèles MedRoute AI...")
