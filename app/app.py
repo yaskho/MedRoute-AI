@@ -282,10 +282,8 @@ def create_pdf_report(meta, diab, derm):
     pdf.section(f"{n}. Limites et avertissements")
     pdf.para(DISCLAIMER, 9)
     return bytes(pdf.output())
-# ==== PDF END ====
 
 
-# --- CONFIG PAGE + STYLE ---
 st.set_page_config(page_title="MedRoute AI - Assistant Clinique", page_icon="🩺", layout="wide")
 st.markdown("""
 <style>
