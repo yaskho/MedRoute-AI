@@ -410,7 +410,6 @@ def diabetes_module():
         return {"level": lvl, "prob": p, "rows": rows, "advice": advice}
 
 
-# --- MODULE IMAGERIE ---
 def analyze_image(image, fname):
     uid = uuid.uuid4().hex[:8]
     orig_path = os.path.join(st.session_state.tmp, f"orig_{uid}.jpg")
