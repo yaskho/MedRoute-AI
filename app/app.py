@@ -50,7 +50,6 @@ DISCLAIMER = ("MedRoute AI est un prototype académique d'aide à la décision. 
               "et ne remplacent pas l'examen clinique ni le jugement du praticien, qui reste seul responsable de l'interprétation.")
 
 
-# --- UTILITAIRES ---
 def level(p):
     """p en % -> (libelle, ton)"""
     if p < 40:
