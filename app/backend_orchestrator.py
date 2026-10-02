@@ -5,7 +5,6 @@ import joblib
 import os
 
 # --- CHARGEMENT DES MODÈLES ---
-# Ajuste le chemin "../models" selon la position de ton fichier main.py dans app/
 MODEL_DIR = "../models"
 
 print("Chargement des modèles MedRoute AI...")
@@ -19,7 +18,6 @@ def medroute_orchestrator(prompt, tabular_features=None, image_path=None):
     """
     print(f"\n--- Requête reçue : '{prompt}' ---")
     
-    # Simulation du routage (ou appel de ton module router.py)
     if "glycémie" in prompt.lower() or "diabète" in prompt.lower():
         selected_path = "TABULAR_ONLY"
     elif "mélanome" in prompt.lower() or "photo" in prompt.lower():
