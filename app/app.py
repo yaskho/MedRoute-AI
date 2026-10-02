@@ -302,7 +302,6 @@ for _k, _v in {"intent": None, "pdf": None, "request": "", "tmp": None}.items():
 if st.session_state.tmp is None:
     st.session_state.tmp = tempfile.mkdtemp()
 
-# --- BARRE LATERALE ---
 with st.sidebar:
     st.markdown("## 🩺 MedRoute AI")
     st.caption("Aide à la décision clinique")
@@ -315,7 +314,6 @@ with st.sidebar:
     st.markdown("---")
     st.caption("Prototype d'aide à la décision : ne remplace pas le jugement du médecin.")
 
-# --- ACCUEIL ---
 st.markdown("""
 <div class="mr-hero">
   <div class="mr-title">MedRoute AI</div>
@@ -364,7 +362,6 @@ show_tab = intent in ("TABULAR_ONLY", "MULTIMODAL")
 show_img = intent in ("IMAGE_ONLY", "MULTIMODAL")
 
 
-# --- MODULE DIABETE ---
 def diabetes_module():
     with st.container(border=True):
         st.subheader("🩸 Bilan métabolique")
