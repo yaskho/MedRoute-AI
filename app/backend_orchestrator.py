@@ -40,7 +40,6 @@ def medroute_orchestrator(prompt, tabular_features=None, image_path=None):
         results["tabular_probability"] = float(np.max(tab_prob))
         print(f"-> [Tabulaire] Risque de diabète : {tab_pred[0]} (Confiance : {np.max(tab_prob)*100:.2f}%)")
         
-    # Exécution Imagerie
     if selected_path in ["IMAGE_ONLY", "MULTIMODAL"] and image_path is not None:
         print(f"-> [Imagerie] Analyse de l'image : {image_path}")
         results["image_processed"] = image_path
