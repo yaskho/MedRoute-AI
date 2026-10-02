@@ -15,7 +15,6 @@ from fpdf import FPDF
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-# --- CHARGEMENT DES MODELES (via backend_orchestrator, inchange) ---
 BACKEND_ERROR = ""
 rf_model, cnn_model = None, None
 try:
@@ -27,7 +26,6 @@ try:
 except Exception as _err:
     BACKEND_ERROR = str(_err)
 
-# --- CONSTANTES METIER ---
 CLASS_CODES = ["akiec", "bcc", "bkl", "df", "mel", "nv", "vasc"]  # ordre alphabetique (HAM10000)
 CLASS_INFO = {
     "akiec": ("Kératose actinique / maladie de Bowen", "Lésion pré-cancéreuse ou carcinome in situ, liée à l'exposition solaire."),
