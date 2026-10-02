@@ -20,7 +20,6 @@ def medroute_orchestrator(prompt, tabular_features=None, image_path=None):
     print(f"\n--- Requête reçue : '{prompt}' ---")
     
     # Simulation du routage (ou appel de ton module router.py)
-    # Ici on simule l'intention selon les mots clés pour l'exemple global
     if "glycémie" in prompt.lower() or "diabète" in prompt.lower():
         selected_path = "TABULAR_ONLY"
     elif "mélanome" in prompt.lower() or "photo" in prompt.lower():
@@ -32,7 +31,6 @@ def medroute_orchestrator(prompt, tabular_features=None, image_path=None):
     
     results = {"intent": selected_path}
     
-    # Exécution Tabulaire
     if selected_path in ["TABULAR_ONLY", "MULTIMODAL"] and tabular_features is not None:
         tab_pred = rf_model.predict([tabular_features])
         tab_prob = rf_model.predict_proba([tabular_features])
