@@ -132,7 +132,6 @@ def route_prompt(text):
     return "MULTIMODAL"
 
 
-# --- GRAD-CAM (explicabilite) ---
 def _find_last_conv(model):
     if "out_relu" in [l.name for l in model.layers]:
         return "out_relu"
@@ -166,7 +165,6 @@ def generate_gradcam_display(img_path, model, alpha=0.4):
     return np.clip(heatmap * alpha + img, 0, 255).astype(np.uint8)
 
 
-# ==== PDF START ====
 def _s(t):
     for a, b in {"’": "'", "–": "-", "—": "-", "≥": ">=", "≤": "<=", "…": "..."}.items():
         t = str(t).replace(a, b)
