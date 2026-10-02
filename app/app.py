@@ -491,7 +491,6 @@ def derm_module():
 diab_res = diabetes_module() if show_tab else None
 derm_res = derm_module() if show_img else None
 
-# --- SYNTHESE (affichee en haut) ---
 with summary_box:
     if diab_res or derm_res:
         with st.container(border=True):
@@ -504,7 +503,6 @@ with summary_box:
     else:
         st.caption("La synthèse apparaîtra ici une fois les résultats disponibles.")
 
-# --- COMPRENDRE LE RESULTAT ---
 st.markdown("---")
 with st.expander("ℹ️ Comprendre ces résultats"):
     st.markdown("**Niveaux de risque et d'indice**\n\n- 🟢 Faible : moins de 40 %\n- 🟠 Modéré : de 40 à 75 %\n- 🔴 Élevé : au-delà de 75 %")
@@ -521,7 +519,6 @@ with st.expander("ℹ️ Comprendre ces résultats"):
             st.markdown(f"- **{CLASS_INFO[c][0]}** : {CLASS_INFO[c][1]}")
     st.markdown("**Limites**\n\n" + DISCLAIMER)
 
-# --- COMPTE-RENDU PDF ---
 st.markdown("---")
 st.subheader("📄 Compte-rendu de consultation")
 if st.button("Préparer le compte-rendu PDF", type="primary"):
