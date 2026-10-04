@@ -4,11 +4,11 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 import joblib
 import os
 
-MODEL_DIR = "../models"
+MODEL_DIR = "models"
 
 print("Chargement des modèles MedRoute AI...")
 rf_model = joblib.load(os.path.join(MODEL_DIR, "diabetes_random_forest.pkl"))
-melanoma_model = tf.keras.models.load_model(os.path.join(MODEL_DIR, "medroute_melanoma_model.h5"))
+melanoma_model = tf.keras.models.load_model(os.path.join(MODEL_DIR, "final_cnn_model.h5"))
 print("Modèles chargés avec succès !")
 
 def medroute_orchestrator(prompt, tabular_features=None, image_path=None):

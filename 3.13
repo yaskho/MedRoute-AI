@@ -1,0 +1,52 @@
+Collecting tensorflow==2.20.0
+  Using cached tensorflow-2.20.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (620.4 MB)
+Requirement already satisfied: keras in ./medroute/lib/python3.10/site-packages (3.12.4)
+Requirement already satisfied: protobuf>=5.28.0 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (7.36.2)
+Requirement already satisfied: six>=1.12.0 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (1.17.0)
+Collecting tensorboard~=2.20.0
+  Downloading tensorboard-2.20.0-py3-none-any.whl (5.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.5/5.5 MB 1.9 MB/s eta 0:00:00
+Requirement already satisfied: packaging in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (26.3)
+Requirement already satisfied: wrapt>=1.11.0 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (2.4.1)
+Requirement already satisfied: typing_extensions>=3.6.6 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (4.16.0)
+Requirement already satisfied: gast!=0.5.0,!=0.5.1,!=0.5.2,>=0.2.1 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (0.7.0)
+Requirement already satisfied: numpy>=1.26.0 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (2.2.6)
+Requirement already satisfied: flatbuffers>=24.3.25 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (25.12.19)
+Requirement already satisfied: termcolor>=1.1.0 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (3.3.0)
+Requirement already satisfied: grpcio<2.0,>=1.24.3 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (1.84.0)
+Requirement already satisfied: setuptools in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (79.0.1)
+Requirement already satisfied: opt_einsum>=2.3.2 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (3.4.0)
+Requirement already satisfied: absl-py>=1.0.0 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (2.5.0)
+Requirement already satisfied: requests<3,>=2.21.0 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (2.34.2)
+Requirement already satisfied: libclang>=13.0.0 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (18.1.1)
+Requirement already satisfied: astunparse>=1.6.0 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (1.6.3)
+Requirement already satisfied: h5py>=3.11.0 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (3.14.0)
+Requirement already satisfied: ml_dtypes<1.0.0,>=0.5.1 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (0.6.0)
+Requirement already satisfied: google_pasta>=0.1.1 in ./medroute/lib/python3.10/site-packages (from tensorflow==2.20.0) (0.2.0)
+Requirement already satisfied: optree in ./medroute/lib/python3.10/site-packages (from keras) (0.20.0)
+Requirement already satisfied: namex in ./medroute/lib/python3.10/site-packages (from keras) (0.1.0)
+Requirement already satisfied: rich in ./medroute/lib/python3.10/site-packages (from keras) (15.0.0)
+Requirement already satisfied: wheel<1.0,>=0.23.0 in ./medroute/lib/python3.10/site-packages (from astunparse>=1.6.0->tensorflow==2.20.0) (0.48.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in ./medroute/lib/python3.10/site-packages (from requests<3,>=2.21.0->tensorflow==2.20.0) (3.5.1)
+Requirement already satisfied: urllib3<3,>=1.26 in ./medroute/lib/python3.10/site-packages (from requests<3,>=2.21.0->tensorflow==2.20.0) (2.8.0)
+Requirement already satisfied: idna<4,>=2.5 in ./medroute/lib/python3.10/site-packages (from requests<3,>=2.21.0->tensorflow==2.20.0) (3.20)
+Requirement already satisfied: certifi>=2023.5.7 in ./medroute/lib/python3.10/site-packages (from requests<3,>=2.21.0->tensorflow==2.20.0) (2026.7.22)
+Collecting markdown>=2.6.8
+  Downloading markdown-3.10.3-py3-none-any.whl (110 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 110.8/110.8 kB 5.4 MB/s eta 0:00:00
+Requirement already satisfied: pillow in ./medroute/lib/python3.10/site-packages (from tensorboard~=2.20.0->tensorflow==2.20.0) (12.3.0)
+Collecting werkzeug>=1.0.1
+  Downloading werkzeug-3.1.9-py3-none-any.whl (228 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 228.7/228.7 kB 9.6 MB/s eta 0:00:00
+Collecting tensorboard-data-server<0.8.0,>=0.7.0
+  Downloading tensorboard_data_server-0.7.2-py3-none-manylinux_2_31_x86_64.whl (6.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 3.9 MB/s eta 0:00:00
+Requirement already satisfied: markdown-it-py>=2.2.0 in ./medroute/lib/python3.10/site-packages (from rich->keras) (4.2.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in ./medroute/lib/python3.10/site-packages (from rich->keras) (2.21.0)
+Requirement already satisfied: mdurl~=0.1 in ./medroute/lib/python3.10/site-packages (from markdown-it-py>=2.2.0->rich->keras) (0.1.2)
+Requirement already satisfied: markupsafe>=2.1.1 in ./medroute/lib/python3.10/site-packages (from werkzeug>=1.0.1->tensorboard~=2.20.0->tensorflow==2.20.0) (3.0.3)
+Installing collected packages: werkzeug, tensorboard-data-server, markdown, tensorboard, tensorflow
+  Attempting uninstall: tensorflow
+    Found existing installation: tensorflow 2.21.0
+    Uninstalling tensorflow-2.21.0:
+      Successfully uninstalled tensorflow-2.21.0
