@@ -20,13 +20,13 @@ rf_model, cnn_model = None, None
 try:
     import backend_orchestrator as _bo
     rf_model = getattr(_bo, "rf_model", None)
-    cnn_model = getattr(_bo, "melanoma_model", None)  # nom reel dans le backend
+    cnn_model = getattr(_bo, "melanoma_model", None)
     if cnn_model is None:
         cnn_model = getattr(_bo, "cnn_model", None)
 except Exception as _err:
     BACKEND_ERROR = str(_err)
 
-CLASS_CODES = ["akiec", "bcc", "bkl", "df", "mel", "nv", "vasc"]  # ordre alphabetique (HAM10000)
+CLASS_CODES = ["akiec", "bcc", "bkl", "df", "mel", "nv", "vasc"]
 CLASS_INFO = {
     "akiec": ("Kératose actinique / maladie de Bowen", "Lésion pré-cancéreuse ou carcinome in situ, liée à l'exposition solaire."),
     "bcc": ("Carcinome basocellulaire", "Cancer cutané le plus fréquent, à croissance lente et rarement métastatique."),
@@ -36,7 +36,7 @@ CLASS_INFO = {
     "nv": ("Naevus mélanocytaire", "Grain de beauté commun, le plus souvent bénin."),
     "vasc": ("Lésion vasculaire", "Angiome, angiokératome ou granulome pyogénique."),
 }
-WATCH = ["akiec", "bcc", "mel"]  # classes a surveiller pour l'indice de suspicion
+WATCH = ["akiec", "bcc", "mel"]
 FEATURES_FR = ["Grossesses", "Glycémie", "Tension diastolique", "Pli cutané",
                "Insuline", "IMC", "Score généalogique (DPF)", "Âge"]
 ROUTES = {
@@ -70,18 +70,18 @@ def read_parameters(v):
     preg, glu, bp, skin, ins, bmi, dpf, age = v
     info = ("Information", "info")
     return [
-        ("Glycémie (test de tolérance, 2 h)", f"{glu:.0f}", "< 140",
+        ("Glycémie (test de tolérance, 2 h)", f"{glu:.0f}", "125,42",
          *band(glu, [140, 200], [("Normale", "ok"), ("Élevée", "warn"), ("Très élevée", "high")])),
-        ("Tension diastolique (mm Hg)", f"{bp:.0f}", "60 - 79",
+        ("Tension diastolique (mm Hg)", f"{bp:.0f}", "71,51",
          *band(bp, [60, 80, 90], [("Basse", "warn"), ("Normale", "ok"), ("Limite haute", "warn"), ("Élevée", "high")])),
-        ("IMC (kg/m²)", f"{bmi:.1f}", "18,5 - 24,9",
+        ("IMC (kg/m²)", f"{bmi:.1f}", "31,50",
          *band(bmi, [18.5, 25, 30], [("Insuffisance pondérale", "warn"), ("Normal", "ok"), ("Surpoids", "warn"), ("Obésité", "high")])),
-        ("Insuline sérique (µU/mL)", f"{ins:.0f}", "16 - 166",
+        ("Insuline sérique (µU/mL)", f"{ins:.0f}", "120,08",
          *band(ins, [16, 166.01], [("Basse", "warn"), ("Normale", "ok"), ("Élevée", "warn")])),
-        ("Épaisseur du pli cutané (mm)", f"{skin:.0f}", "-", *info),
-        ("Score généalogique (DPF)", f"{dpf:.2f}", "-", *info),
-        ("Âge (ans)", f"{age}", "-", *info),
-        ("Nombre de grossesses", f"{preg}", "-", *info),
+        ("Épaisseur du pli cutané (mm)", f"{skin:.0f}", "29,22", *info),
+        ("Score généalogique (DPF)", f"{dpf:.2f}", "0,44", *info),
+        ("Âge (ans)", f"{age}", "32,45", *info),
+        ("Nombre de grossesses", f"{preg}", "4,42", *info),
     ]
 
 
@@ -314,6 +314,7 @@ with st.sidebar:
     st.markdown("---")
     st.caption("Prototype d'aide à la décision : ne remplace pas le jugement du médecin.")
 
+# --- ACCUEIL ---
 st.markdown("""
 <div class="mr-hero">
   <div class="mr-title">MedRoute AI</div>
