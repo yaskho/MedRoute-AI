@@ -1,48 +1,62 @@
+import torch
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import joblib
 import os
-
+import json
+from tensorflow.keras import layers
+from safetensors.tensorflow import load_file
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 MODEL_DIR = "models"
 
+MODEL_CHECKPOINT = "distilbert-base-uncased"
+tokenizer = AutoTokenizer.from_pretrained(MODEL_CHECKPOINT)
+vocab_size = tokenizer.vocab_size
+max_length = tokenizer.model_max_length
+
 print("Chargement des modèles MedRoute AI...")
+
+
+model_dir = "models/transformer/final_transformer_model"
+
+transformer_model = AutoModelForSequenceClassification.from_pretrained(model_dir)
+    
+
 rf_model = joblib.load(os.path.join(MODEL_DIR, "diabetes_random_forest.pkl"))
 melanoma_model = tf.keras.models.load_model(os.path.join(MODEL_DIR, "final_cnn_model.h5"))
 print("Modèles chargés avec succès !")
 
 def medroute_orchestrator(prompt, tabular_features=None, image_path=None):
-    """
-    Orchestrateur central MedRoute AI
-    """
     print(f"\n--- Requête reçue : '{prompt}' ---")
     
-    if "glycémie" in prompt.lower() or "diabète" in prompt.lower():
-        selected_path = "TABULAR_ONLY"
-    elif "mélanome" in prompt.lower() or "photo" in prompt.lower():
-        selected_path = "IMAGE_ONLY"
-    else:
-        selected_path = "MULTIMODAL"
+    inputs = tokenizer(
+        prompt,
+        return_tensors="pt",     
+        padding=True,
+        truncation=True,
+        max_length=128
+    )
+
+    transformer_model.eval()
+    with torch.no_grad():
+        outputs = transformer_model(**inputs)
+        logits = outputs.logits
         
+    probs = torch.softmax(logits, dim=-1).tolist()[0]
+    intent_idx = np.argmax(probs)
+    
+    intent_mapping = {0: "TABULAR_ONLY", 1: "IMAGE_ONLY", 2: "MULTIMODAL"}
+    selected_path = intent_mapping[intent_idx]
     print(f"[Routeur AI] Chemin sélectionné --> {selected_path}")
     
-    results = {"intent": selected_path}
     
-    if selected_path in ["TABULAR_ONLY", "MULTIMODAL"] and tabular_features is not None:
-        tab_pred = rf_model.predict([tabular_features])
-        tab_prob = rf_model.predict_proba([tabular_features])
-        results["tabular_prediction"] = int(tab_pred[0])
-        results["tabular_probability"] = float(np.max(tab_prob))
-        print(f"-> [Tabulaire] Risque de diabète : {tab_pred[0]} (Confiance : {np.max(tab_prob)*100:.2f}%)")
-        
-    if selected_path in ["IMAGE_ONLY", "MULTIMODAL"] and image_path is not None:
-        print(f"-> [Imagerie] Analyse de l'image : {image_path}")
-        results["image_processed"] = image_path
-        
-    return results
+    return selected_path
+
 
 if __name__ == "__main__":
-    # Test global
-    sample_features = [63, 130, 60, 23, 190, 25.5, 0.45, 32]
-    res = medroute_orchestrator("Analyser la glycémie de ce patient", tabular_features=sample_features)
+    sample_text = "analyser le risque de diabete a partir de glucose"
+
+    cls, probs = medroute_orchestrator(sample_text)
+    breakpoint()
     print("Résultat final :", res)

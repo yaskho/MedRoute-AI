@@ -19,6 +19,7 @@ BACKEND_ERROR = ""
 rf_model, cnn_model = None, None
 try:
     import backend_orchestrator as _bo
+    from backend_orchestrator import medroute_orchestrator
     rf_model = getattr(_bo, "rf_model", None)
     cnn_model = getattr(_bo, "melanoma_model", None)
     if cnn_model is None:
@@ -71,13 +72,13 @@ def read_parameters(v):
     info = ("Information", "info")
     return [
         ("Glycémie (test de tolérance, 2 h)", f"{glu:.0f}", "125,42",
-         *band(glu, [140, 200], [("Normale", "ok"), ("Élevée", "warn"), ("Très élevée", "high")])),
+         *band(glu, [120, 170], [("Normale", "ok"), ("Élevée", "warn"), ("Très élevée", "high")])),
         ("Tension diastolique (mm Hg)", f"{bp:.0f}", "71,51",
          *band(bp, [60, 80, 90], [("Basse", "warn"), ("Normale", "ok"), ("Limite haute", "warn"), ("Élevée", "high")])),
         ("IMC (kg/m²)", f"{bmi:.1f}", "31,50",
-         *band(bmi, [18.5, 25, 30], [("Insuffisance pondérale", "warn"), ("Normal", "ok"), ("Surpoids", "warn"), ("Obésité", "high")])),
+         *band(bmi, [25, 30, 35], [("Insuffisance pondérale", "warn"), ("Normal", "ok"), ("Surpoids", "warn"), ("Obésité", "high")])),
         ("Insuline sérique (µU/mL)", f"{ins:.0f}", "120,08",
-         *band(ins, [16, 166.01], [("Basse", "warn"), ("Normale", "ok"), ("Élevée", "warn")])),
+         *band(ins, [16, 140], [("Basse", "warn"), ("Normale", "ok"), ("Élevée", "warn")])),
         ("Épaisseur du pli cutané (mm)", f"{skin:.0f}", "29,22", *info),
         ("Score généalogique (DPF)", f"{dpf:.2f}", "0,44", *info),
         ("Âge (ans)", f"{age}", "32,45", *info),
@@ -346,7 +347,7 @@ with st.form("prompt_form"):
                         placeholder="Ex. : Évaluer le risque diabétique et analyser cette lésion suspecte")
     sent = st.form_submit_button("Analyser la requête", type="primary")
 if sent and txt.strip():
-    st.session_state.intent, st.session_state.request, st.session_state.pdf = route_prompt(txt), txt.strip(), None
+    st.session_state.intent, st.session_state.request, st.session_state.pdf = medroute_orchestrator(txt), txt.strip(), None
     st.rerun()
 
 intent = st.session_state.intent
