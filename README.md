@@ -1,4 +1,3 @@
-# MedRoute-AI
 # MedRoute AI
 
 **A multimodal AI platform for clinical decision support.**
